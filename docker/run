@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+docker build -t "test-upnp" docker
+docker run -it --rm \
+	--cap-drop=ALL \
+	-v "$PWD:/app" \
+	-v "$PWD/docker:/app/docker:ro" \
+	--env-file="docker/.env" \
+	--name running-test-upnp "test-upnp"
